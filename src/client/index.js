@@ -17,11 +17,6 @@ ReactDOM.render(
   document.getElementById("root")
 );
 
-store.addPlayer("Baker Mayfield");
-store.addPlayer("OBJ");
-
-setTimeout(() => {
-  store.addPlayer("Nick Chubb");
-}, 2000);
+store.loadPlayers();
 
 module.hot.accept();
