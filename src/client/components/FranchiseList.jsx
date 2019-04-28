@@ -3,6 +3,7 @@ import { observable, action } from "mobx";
 import { observer } from "mobx-react";
 
 import MyFranchise from "./MyFranchise";
+import Franchise from "./Franchise";
 
 @observer
 class FranchiseList extends React.Component {
@@ -13,15 +14,17 @@ class FranchiseList extends React.Component {
           <div>
             <MyFranchise franchise={this.props.store.franchises[0]} />
 
-            <ul>
-              {this.props.store.franchises
-                .slice(1, this.props.store.franchises.length)
-                .map(franchise => (
-                  <li key={franchise.id}>
-                    {franchise.name} - {franchise.budget}
-                  </li>
-                ))}
-            </ul>
+            <div className="max-w-sm rounded overflow-hidden shadow-lg">
+              <div className="px-6 py-4">
+                <ul>
+                  {this.props.store.franchises
+                    .slice(1, this.props.store.franchises.length)
+                    .map(franchise => (
+                      <Franchise franchise={franchise} key={franchise.id} />
+                    ))}
+                </ul>
+              </div>
+            </div>
           </div>
         ) : (
           <h2>Loading franchises...</h2>

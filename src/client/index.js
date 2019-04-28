@@ -2,17 +2,17 @@ import React from "react";
 import ReactDOM from "react-dom";
 import DevTools from "mobx-react-devtools";
 
-import PlayerListModel from "./models/PlayerListModel";
-import FranchiseListModel from "./models/FranchiseListModel";
+import playersStore from "./models/PlayersStore";
+import franchisesStore from "./models/FranchisesStore";
+import AuctionModel from "./models/AuctionModel";
 
 import PlayerList from "./components/PlayerList";
-import MyFranchise from "./components/MyFranchise";
 import FranchiseList from "./components/FranchiseList";
+import AuctionStatus from "./components/AuctionStatus";
 
 import "./app.css";
 
-const playerStore = new PlayerListModel();
-const franchiseStore = new FranchiseListModel();
+const auctionStore = new AuctionModel(60, 2);
 
 ReactDOM.render(
   <div>
@@ -20,19 +20,22 @@ ReactDOM.render(
 
     <div className="container p-6">
       <div className="flex justify-around">
-        <FranchiseList store={franchiseStore} />
-        <PlayerList store={playerStore} />
+        <FranchiseList store={franchisesStore} />
+        <AuctionStatus store={auctionStore} />
+        <PlayerList store={playersStore} />
       </div>
     </div>
   </div>,
   document.getElementById("root")
 );
 
-playerStore.loadPlayers();
+playersStore.loadPlayers();
 
-franchiseStore.addFranchise("Alex's Team", 200);
-franchiseStore.addFranchise("Sean's Team", 180);
-franchiseStore.addFranchise("Mike's Team", 150);
-franchiseStore.addFranchise("Tom's Team", 175);
+franchisesStore.addFranchise("Alex's Team", 200);
+franchisesStore.addFranchise("Sean's Team", 180);
+franchisesStore.addFranchise("Mike's Team", 150);
+franchisesStore.addFranchise("Tom's Team", 175);
+
+auctionStore.startClock();
 
 module.hot.accept();

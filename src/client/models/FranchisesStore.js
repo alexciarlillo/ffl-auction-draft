@@ -2,8 +2,14 @@ import { observable, computed, action } from "mobx";
 
 import FranchiseModel from "./FranchiseModel";
 
-export default class PlayerListModel {
+class FranchisesStore {
   @observable franchises = [];
+
+  getFranchise(index) {
+    if (this.franchises.length > 0) return this.franchises[0];
+
+    return { name: "loading" };
+  }
 
   @computed
   get myFranchise() {
@@ -15,3 +21,5 @@ export default class PlayerListModel {
     this.franchises.push(new FranchiseModel(name, budget));
   }
 }
+
+export default new FranchisesStore();

@@ -2,13 +2,17 @@ import { observable, computed, action } from "mobx";
 
 import PlayerModel from "./PlayerModel";
 
-export default class PlayerListModel {
+class PlayersStore {
   @observable players = [];
   @observable loading = false;
 
   @computed
   get activePlayers() {
     return this.players.filter(player => player.active === "1");
+  }
+
+  getPlayer(id) {
+    return this.players.find(player => player.id === id);
   }
 
   @action
@@ -24,3 +28,5 @@ export default class PlayerListModel {
       });
   }
 }
+
+export default new PlayersStore();
