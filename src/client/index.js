@@ -2,40 +2,47 @@ import React from "react";
 import ReactDOM from "react-dom";
 import DevTools from "mobx-react-devtools";
 
-import playersStore from "./models/PlayersStore";
-import franchisesStore from "./models/FranchisesStore";
-import AuctionModel from "./models/AuctionModel";
-
 import PlayerList from "./components/PlayerList";
 import FranchiseList from "./components/FranchiseList";
 import AuctionStatus from "./components/AuctionStatus";
 
 import "./app.css";
+import { Provider } from "mobx-react";
+import LobbyStore from "./stores/LobbyStore";
+import PlayersStore from "./stores/PlayersStore";
+import FranchisesStore from "./stores/FranchisesStore";
 
-const auctionStore = new AuctionModel(60, 2);
+const playersStore = new PlayersStore();
+const franchisesStore = new FranchisesStore();
+const lobbyStore = new LobbyStore(playersStore, franchisesStore);
 
 ReactDOM.render(
-  <div>
-    <DevTools />
+  <Provider
+    lobbyStore={lobbyStore}
+    playersStore={playersStore}
+    franchisesStore={franchisesStore}
+  >
+    <div>
+      <DevTools />
 
-    <div className="container p-6">
-      <div className="flex justify-around">
-        <FranchiseList store={franchisesStore} />
-        <AuctionStatus store={auctionStore} />
-        <PlayerList store={playersStore} />
+      <div className="container p-6">
+        <div className="flex justify-around">
+          <FranchiseList />
+          <AuctionStatus />
+          <PlayerList />
+        </div>
       </div>
     </div>
-  </div>,
+  </Provider>,
   document.getElementById("root")
 );
-
-playersStore.loadPlayers();
 
 franchisesStore.addFranchise("Alex's Team", 200);
 franchisesStore.addFranchise("Sean's Team", 180);
 franchisesStore.addFranchise("Mike's Team", 150);
 franchisesStore.addFranchise("Tom's Team", 175);
 
-auctionStore.startClock();
+lobbyStore.reset();
+lobbyStore.startClock();
 
 module.hot.accept();

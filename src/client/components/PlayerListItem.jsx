@@ -1,10 +1,9 @@
-import React from "react";
 import { observer } from "mobx-react";
 
-const Player = observer(({ player }) => (
+const PlayerListItem = observer(({ player }) => (
   <li>
     {player.name} - {player.team} - {player.position}
   </li>
 ));
 
-export default Player;
+export default PlayerListItem;

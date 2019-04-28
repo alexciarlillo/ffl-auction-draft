@@ -1,28 +1,22 @@
-import React, { Component } from "react";
-import { observable, action } from "mobx";
-import { observer } from "mobx-react";
+import React from "react";
+import { inject, observer } from "mobx-react";
 
-import Player from "./Player";
+import PlayerListItem from "./PlayerListItem";
 
-@observer
-class PlayerList extends React.Component {
-  render() {
-    return (
+const PlayerList = ({ playersStore }) => (
+  <div>
+    {playersStore.loading ? (
+      <h1>Loading players...</h1>
+    ) : (
       <div>
-        {this.props.store.loading ? (
-          <h1>Loading players...</h1>
-        ) : (
-          <div>
-            <ul>
-              {this.props.store.activePlayers.map(player => (
-                <Player player={player} key={player.id} />
-              ))}
-            </ul>
-          </div>
-        )}
+        <ul>
+          {playersStore.players.map(player => (
+            <PlayerListItem player={player} key={player.id} />
+          ))}
+        </ul>
       </div>
-    );
-  }
-}
+    )}
+  </div>
+);
 
-export default PlayerList;
+export default inject("playersStore")(observer(PlayerList));
