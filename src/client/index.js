@@ -4,7 +4,7 @@ import DevTools from "mobx-react-devtools";
 
 import PlayerList from "./components/PlayerList";
 import FranchiseList from "./components/FranchiseList";
-import AuctionStatus from "./components/AuctionStatus";
+import LobbyDetails from "./components/LobbyDetails";
 
 import "./app.css";
 import { Provider } from "mobx-react";
@@ -23,14 +23,11 @@ ReactDOM.render(
     franchisesStore={franchisesStore}
   >
     <div>
-      <DevTools />
-
-      <div className="container p-6">
-        <div className="flex justify-around">
-          <FranchiseList />
-          <AuctionStatus />
-          <PlayerList />
-        </div>
+      {/* <DevTools /> */}
+      <LobbyDetails />
+      <div className="flex justify-around">
+        <FranchiseList />
+        <PlayerList />
       </div>
     </div>
   </Provider>,

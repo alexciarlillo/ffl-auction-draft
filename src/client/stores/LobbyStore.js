@@ -21,6 +21,14 @@ class LobbyStore {
     return this.franchisesStore.getFranchise(this.leadingFranchiseId);
   }
 
+  @computed get minutes() {
+    return Math.floor(this.clock / 60);
+  }
+
+  @computed get seconds() {
+    return this.clock % 60;
+  }
+
   @action reset() {
     this.clock = 120;
     this.playerId = null;
