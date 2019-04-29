@@ -41,5 +41,6 @@ franchisesStore.addFranchise("Tom's Team", 175);
 
 lobbyStore.reset();
 lobbyStore.startClock();
+lobbyStore.makeBid(25);
 
 module.hot.accept();

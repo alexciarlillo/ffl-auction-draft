@@ -6,14 +6,14 @@ import LobbyActions from "./LobbyActions";
 import TimeClock from "./TimeClock";
 
 const LobbyDetails = ({ lobbyStore }) => (
-  <div className="w-full rounded overflow-hidden shadow-lg text-4xl">
-    <div className="flex flex-row justify-between items-stretch">
+  <div className="w-full rounded overflow-hidden shadow-lg text-base h-20">
+    <div className="flex flex-row justify-between items-stretch h-full">
       <div className="w-1/5">
         <CurrentPlayer />
       </div>
 
       <div className="w-1/5">
-        <CurrentBid />
+        <CurrentBid lobby={lobbyStore} />
       </div>
 
       <div className="w-2/5">

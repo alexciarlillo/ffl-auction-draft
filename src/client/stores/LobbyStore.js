@@ -7,6 +7,8 @@ class LobbyStore {
   @observable leadingBidAmount;
   @observable leadingFranchiseId;
 
+  @observable customBidAmount;
+
   constructor(playersStore, franchisesStore) {
     this.playersStore = playersStore;
     this.franchisesStore = franchisesStore;
@@ -29,10 +31,15 @@ class LobbyStore {
     return this.clock % 60;
   }
 
+  @computed get minimumBidAmount() {
+    return this.leadingBidAmount + 1;
+  }
+
   @action reset() {
-    this.clock = 120;
+    this.clock = 90;
     this.playerId = null;
-    this.leadingBidAmount = null;
+    this.leadingBidAmount = 1;
+    this.customBidAmount = 1;
     this.leadingFranchiseId = null;
   }
 
@@ -43,7 +50,28 @@ class LobbyStore {
   }
 
   @action tick() {
-    this.clock--;
+    if (this.clock > 0) {
+      this.clock--;
+    } else {
+      this.clock = 0;
+      clearInterval(this.clockInterval);
+    }
+  }
+
+  @action setCustomBid(amount) {
+    if (amount > this.leadingBidAmount) {
+      this.customBidAmount = amount;
+    }
+  }
+
+  @action makeBid(amount) {
+    if (amount > this.leadingBidAmount) {
+      this.leadingBidAmount = amount;
+    }
+
+    if (this.customBidAmount < this.leadingBidAmount) {
+      this.setCustomBid(this.leadingBidAmount + 1);
+    }
   }
 }
 
