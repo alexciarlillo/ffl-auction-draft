@@ -1,15 +1,15 @@
 import { observable } from "mobx";
 
 export default class PlayerModel {
-  id = Math.random();
+  @observable id;
   @observable name;
   @observable team;
   @observable position;
 
   constructor(id, name, position, team) {
-    this.id = player.id;
-    this.name = player.displayName;
-    this.position = player.position;
-    this.team = player.team;
+    this.id = id;
+    this.name = name;
+    this.position = position;
+    this.team = team;
   }
 }

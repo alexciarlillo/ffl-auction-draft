@@ -17,22 +17,20 @@ class PlayersStore {
     this.error = null;
 
     try {
-      const players = await ßfetchPlayers();
-      const filteredPlayers = players
-        .filter(player => player.active === "1")
-        .map(
-          player =>
+      let players = await fetchPlayers();
+      let filteredPlayers = players.filter(player => player.active === "1");
+      runInAction(() => {
+        this.loading = false;
+        filteredPlayers.forEach(player => {
+          this.players.push(
             new PlayerModel(
-              player.id,
-              player.displayNamne,
+              player.playerId,
+              player.displayName,
               player.position,
               player.team
             )
-        );
-
-      runInAction(() => {
-        this.loading = false;
-        this.players = filteredPlayers;
+          );
+        });
       });
     } catch (error) {
       runInAction(() => {
