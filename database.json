@@ -1,0 +1,11 @@
+{
+  "defaultEnv": "dev",
+  "sql-file": true,
+  "dev": {
+    "driver": "pg",
+    "user": { "ENV": "FFL_DB_USER" },
+    "password": { "ENV": "FFL_DB_PASS" },
+    "host": "localhost",
+    "database": "ffl_draft"
+  }
+}
