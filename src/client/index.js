@@ -2,15 +2,23 @@ import React from "react";
 import ReactDOM from "react-dom";
 import DevTools from "mobx-react-devtools";
 
-import PlayerList from "./components/PlayerList";
-import FranchiseList from "./components/FranchiseList";
-import LobbyDetails from "./components/LobbyDetails";
+import Lobby from "./components/Lobby";
+import Franchise from "./components/Franchise";
 
 import "./app.css";
 import { Provider } from "mobx-react";
+
 import LobbyStore from "./stores/LobbyStore";
 import PlayersStore from "./stores/PlayersStore";
 import FranchisesStore from "./stores/FranchisesStore";
+
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Redirect,
+  withRouter
+} from "react-router-dom";
 
 const playersStore = new PlayersStore();
 const franchisesStore = new FranchisesStore();
@@ -22,14 +30,10 @@ ReactDOM.render(
     playersStore={playersStore}
     franchisesStore={franchisesStore}
   >
-    <div>
-      {/* <DevTools /> */}
-      <LobbyDetails />
-      <div className="flex justify-around">
-        <FranchiseList />
-        <PlayerList />
-      </div>
-    </div>
+    <Router>
+      <Route path="/lobby/:lobbyId" component={Lobby} />
+      <Route path="/franchise/:claimToken" component={Franchise} />
+    </Router>
   </Provider>,
   document.getElementById("root")
 );

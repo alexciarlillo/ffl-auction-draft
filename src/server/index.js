@@ -1,4 +1,5 @@
 const express = require("express");
+const path = require("path");
 const dotenv = require("dotenv").config();
 const db = require("./db");
 const app = express();
@@ -62,5 +63,13 @@ app.get(
     });
   })
 );
+
+// app.get("/*", function(req, res) {
+//   res.sendFile(path.join(__dirname, "../../dist/index.html"), function(err) {
+//     if (err) {
+//       res.status(500).send(err);
+//     }
+//   });
+// });
 
 app.listen(8080, () => console.log("Listening on port 8080!"));
