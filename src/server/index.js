@@ -59,7 +59,7 @@ app.get(
     );
 
     res.status(200).json({
-      lobby: lobby
+      ...lobby
     });
   })
 );
