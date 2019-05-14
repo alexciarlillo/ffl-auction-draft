@@ -19,6 +19,11 @@ module.exports = {
       template: "./public/index.html",
       favicon: "./public/favicon.ico"
     }),
+    new HtmlWebpackPlugin({  // Also generate a test.html
+      filename: 'create.html',
+      template: './public/create.html',
+      inject: false
+    }),
     new CopyWebpackPlugin(["public/players.json"])
   ],
   resolve: {
@@ -56,7 +61,10 @@ module.exports = {
     open: true,
     historyApiFallback: true,
     proxy: {
-      "/api": "http://localhost:8080"
+      "/api": "http://localhost:8080",
+      "/create": "http://localhost:8080/create",
+      "/lobby": "http://localhost:8080"
+
     }
   }
 };

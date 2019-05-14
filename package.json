@@ -43,6 +43,8 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.4.4",
+    "body-parser": "^1.19.0",
+    "cookie-session": "^1.3.3",
     "db-migrate": "^0.11.5",
     "db-migrate-pg": "^0.5.0",
     "dotenv": "^8.0.0",
@@ -52,6 +54,9 @@
     "mobx": "^5.9.4",
     "mobx-react": "^5.4.3",
     "mobx-react-devtools": "^6.1.1",
+    "nodemailer": "^6.1.1",
+    "passwordless": "^1.1.3",
+    "passwordless-postgrestore": "https://github.com/Battochon/passwordless-postgrestore.git",
     "pg": "^7.11.0",
     "pg-promise": "^8.7.2",
     "react": "^16.8.6",
