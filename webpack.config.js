@@ -62,9 +62,8 @@ module.exports = {
     historyApiFallback: true,
     proxy: {
       "/api": "http://localhost:8080",
-      "/create": "http://localhost:8080/create",
-      "/lobby": "http://localhost:8080"
-
+      "/create": "http://localhost:8080",
+      "/franchise": "http://localhost:8080"
     }
   }
 };

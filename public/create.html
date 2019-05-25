@@ -6,13 +6,17 @@
   </head>
 
   <body>
-    <form method="POST" action="/api/lobby">
+    <form method="POST" action="/lobby">
       <label>Name:
         <input type="text" name="name" />
       </label>
 
       <label>Email:
-        <input type="text" name="user" />
+        <input type="text" name="email" />
+      </label>
+
+      <label># Franchises:
+        <input type="numeric" name="franchiseCount" />
       </label>
 
       <button type="submit">Submit</button>

@@ -1,5 +1,5 @@
 // Loading and initializing the library:
-const pgp = require("pg-promise")({});
+const pgp = require("pg-promise")({capSQL: true});
 
 // Creating a new database instance from the connection details:
 const db = pgp({
@@ -11,4 +11,4 @@ const db = pgp({
 });
 
 // Exporting the database object for shared use:
-module.exports = db;
+module.exports = {pgp, db};
