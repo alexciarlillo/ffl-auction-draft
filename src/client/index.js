@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import DevTools from "mobx-react-devtools";
 
 import CreateLobby from "./components/CreateLobby";
+import JoinLobby from "./components/JoinLobby";
 import Lobby from "./components/Lobby";
 import Franchise from "./components/Franchise";
 
@@ -33,6 +34,7 @@ ReactDOM.render(
   >
     <Router>
       <Route path="/create" component={CreateLobby} />
+      <Route path="/join/:lobbyId" component={JoinLobby} />
       <Route path="/lobby/:lobbyId" component={Lobby} />
       <Route path="/franchise/:franchiseId" component={Franchise} />
     </Router>

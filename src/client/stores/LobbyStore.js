@@ -80,7 +80,7 @@ class LobbyStore {
   }
 
   @action establishSocket(token) {
-    this.socket = io.connect("http://localhost:3000");
+    this.socket = io.connect("http://192.168.1.130:3000");
 
     this.socket.on('connect', () => {
       this.socket

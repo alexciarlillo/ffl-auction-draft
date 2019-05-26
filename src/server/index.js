@@ -144,6 +144,22 @@ app.get(
 )
 
 app.post(
+  "/api/lobby/:lobbyId/join",
+  asyncHandler(async (req, res, next) => {
+    const lobby = await DB.getLobbyById(req.params.lobbyId);
+    const {franchise_name, email} = req.body;
+    const token = await TokenService.getToken();
+    const franchise = await DB.createFranchiseClaim({lobbyId: lobby.id, email, token, name: franchise_name});
+    mailer.sendFranchiseToken({recipient: email, token, franchise, lobby});
+
+    res.status(200).json({
+      success: true,
+      message: 'Lobby joined. Check email for access link.'
+    });
+  })
+)
+
+app.post(
   "/api/lobby/:lobbyId/pause",
   authJWT,
   asyncHandler(async (req, res, next) => {

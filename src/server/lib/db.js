@@ -47,12 +47,12 @@ class DB {
     return db.none(query);
   }
 
-  static async createFranchiseClaim({lobbyId, email, token, isAdmin = false}) {
+  static async createFranchiseClaim({lobbyId, email, token, isAdmin = false, name = null}) {
     let franchise = null;
     const hashedToken = await TokenService.hashToken(token);
 
     try {
-      franchise = await db.one("UPDATE franchises SET claimed_at = now(), is_admin = ${isAdmin}, email = ${email}, claim_token = ${hashedToken} WHERE id IN (SELECT id FROM franchises WHERE claimed_at IS NULL AND lobby_id = ${lobbyId} ORDER BY created_at LIMIT 1) RETURNING id", {lobbyId, email, hashedToken, isAdmin});
+      franchise = await db.one("UPDATE franchises SET claimed_at = now(), is_admin = ${isAdmin}, email = ${email}, claim_token = ${hashedToken}, name = COALESCE(${name}, name) WHERE id IN (SELECT id FROM franchises WHERE claimed_at IS NULL AND lobby_id = ${lobbyId} ORDER BY created_at LIMIT 1) RETURNING id", {lobbyId, email, hashedToken, isAdmin, name});
     } catch (err) {
       console.log(err);
     } finally {

@@ -1,11 +1,11 @@
 import React from "react";
 import axios from "axios";
 
-class CreateLobby extends React.Component {
+class JoinLobby extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {form: {name: "", email: "", franchiseCount: 10, franchiseBudget: 100}, submitting: false, created: false, error: false};
+    this.state = {form: {email: "", franchise_name: ""}, submitting: false, joined: false, error: false};
   }
 
   _handleChange = (event) => {
@@ -28,11 +28,11 @@ class CreateLobby extends React.Component {
     });
 
     try {
-      const response = await axios.post(`/api/lobby`, this.state.form);
+      const response = await axios.post(`/api/lobby/${this.props.match.params.lobbyId}/join`, this.state.form);
 
       this.setState({
         submitting: false,
-        created: true
+        joined: true
       });
 
     } catch (err) {
@@ -47,36 +47,28 @@ class CreateLobby extends React.Component {
       <div>
         {! this.state.created &&
           <form onSubmit={this._handleSubmit}>
-            <label>Name:
-              <input type="text" name="name" value={this.state.form.name} onChange={this._handleChange}/>
+            <label>Franchise Name:
+              <input type="text" name="franchise_name" value={this.state.form.name} onChange={this._handleChange}/>
             </label>
 
             <label>Email:
               <input type="text" name="email" value={this.state.form.email} onChange={this._handleChange}/>
             </label>
 
-            <label># Franchises:
-              <input type="number" name="franchiseCount" value={this.state.form.franchiseCount} onChange={this._handleChange}/>
-            </label>
-
-            <label>Franchise Budget:
-              <input type="number" name="budget" value={this.state.form.franchiseBudget} onChange={this._handleChange}/>
-            </label>
-
             <button type="submit">Submit</button>
           </form>
         }
 
-        { this.state.created &&
-          <h2>Draft lobby created. Check email for access link</h2>
+        { this.state.joined &&
+          <h2>Franchise claimed. Check email for access link</h2>
         }
 
         { this.state.error &&
-          <h2>An error occurred. Please try again.</h2>
+          <h2>An error occurred. Please try again. Lobby may be filled.</h2>
         }
       </div>
     );
   }
 }
 
-export default CreateLobby;
+export default JoinLobby;
