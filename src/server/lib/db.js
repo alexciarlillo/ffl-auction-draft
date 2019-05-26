@@ -25,6 +25,17 @@ class DB {
     }
   }
 
+  static async getFranchisesForLobby(lobbyId) {
+    let franchises = null;
+    try {
+      franchises = await db.many("SELECT * FROM franchises WHERE lobby_id = ${lobbyId}", { lobbyId });
+    } catch (err) {
+      console.log(err);
+    } finally {
+      return franchises;
+    }
+  }
+
   static async createFranchisesFor(lobby) {
     let franchises = [];
     for (let i = 0; i < lobby.franchise_count; i++) {

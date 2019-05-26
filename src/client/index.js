@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import DevTools from "mobx-react-devtools";
 
+import CreateLobby from "./components/CreateLobby";
 import Lobby from "./components/Lobby";
 import Franchise from "./components/Franchise";
 
@@ -31,8 +32,9 @@ ReactDOM.render(
     franchisesStore={franchisesStore}
   >
     <Router>
+      <Route path="/create" component={CreateLobby} />
       <Route path="/lobby/:lobbyId" component={Lobby} />
-      <Route path="/franchise/:claimToken" component={Franchise} />
+      <Route path="/franchise/:franchiseId" component={Franchise} />
     </Router>
   </Provider>,
   document.getElementById("root")
