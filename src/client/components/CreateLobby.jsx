@@ -5,7 +5,7 @@ class Lobby extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {form: {name: "", email: "", franchiseCount: 10}, submitting: false, created: false, error: false};
+    this.state = {form: {name: "", email: "", franchiseCount: 10, franchiseBudget: 100}, submitting: false, created: false, error: false};
   }
 
   _handleChange = (event) => {
@@ -57,6 +57,10 @@ class Lobby extends React.Component {
 
             <label># Franchises:
               <input type="number" name="franchiseCount" value={this.state.form.franchiseCount} onChange={this._handleChange}/>
+            </label>
+
+            <label>Franchise Budget:
+              <input type="number" name="budget" value={this.state.form.franchiseBudget} onChange={this._handleChange}/>
             </label>
 
             <button type="submit">Submit</button>

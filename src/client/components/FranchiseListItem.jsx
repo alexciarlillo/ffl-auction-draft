@@ -3,7 +3,7 @@ import { observer } from "mobx-react";
 
 const FranchiseListItem = observer(({ franchise }) => (
   <li>
-    {franchise.name} - ${franchise.budget}
+    {franchise.name} - ${franchise.remaining_budget}
   </li>
 ));
 

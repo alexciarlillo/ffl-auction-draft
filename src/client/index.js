@@ -11,7 +11,7 @@ import { Provider } from "mobx-react";
 
 import LobbyStore from "./stores/LobbyStore";
 import PlayersStore from "./stores/PlayersStore";
-import FranchisesStore from "./stores/FranchisesStore";
+import FranchiseStore from "./stores/FranchiseStore";
 
 import {
   BrowserRouter as Router,
@@ -22,14 +22,14 @@ import {
 } from "react-router-dom";
 
 const playersStore = new PlayersStore();
-const franchisesStore = new FranchisesStore();
-const lobbyStore = new LobbyStore(playersStore, franchisesStore);
+const franchiseStore = new FranchiseStore();
+const lobbyStore = new LobbyStore(playersStore, franchiseStore);
 
 ReactDOM.render(
   <Provider
     lobbyStore={lobbyStore}
     playersStore={playersStore}
-    franchisesStore={franchisesStore}
+    franchiseStore={franchiseStore}
   >
     <Router>
       <Route path="/create" component={CreateLobby} />
@@ -39,14 +39,5 @@ ReactDOM.render(
   </Provider>,
   document.getElementById("root")
 );
-
-franchisesStore.addFranchise("Alex's Team", 200);
-franchisesStore.addFranchise("Sean's Team", 180);
-franchisesStore.addFranchise("Mike's Team", 150);
-franchisesStore.addFranchise("Tom's Team", 175);
-
-lobbyStore.reset();
-lobbyStore.startClock();
-lobbyStore.makeBid(25);
 
 module.hot.accept();

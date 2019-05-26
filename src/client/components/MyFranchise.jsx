@@ -6,7 +6,7 @@ const MyFranchise = observer(({ franchise }) => (
     <div className="px-6 py-4">
       <div className="font-bold text-xl mb-2">{franchise.name}</div>
       <p className="text-gray-700 text-base">
-        ${franchise.budget} Remaining Budget
+        ${franchise.remaining_budget} Remaining Budget
       </p>
     </div>
     <ol className="px-6 py-4">

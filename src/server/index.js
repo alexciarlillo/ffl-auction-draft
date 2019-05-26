@@ -52,10 +52,10 @@ var sessionChecker = (req, res, next) => {
 app.post(
   "/api/lobby",
   asyncHandler(async (req, res, next) => {
-    const {name, email, franchiseCount} = req.body;
+    const {name, email, franchiseCount, franchiseBudget} = req.body;
 
     // TODO - assert name and email, franchise count validation
-    const lobby = await DB.createLobby({name, franchiseCount});
+    const lobby = await DB.createLobby({name, franchiseCount, franchiseBudget});
     await DB.createFranchisesFor(lobby);
 
     const token = await TokenService.getToken();
@@ -119,10 +119,12 @@ app.get(
   asyncHandler(async (req, res, next) => {
     const lobby = await DB.getLobbyById(req.params.lobbyId);
     const franchises = await DB.getFranchisesForLobby(req.params.lobbyId);
+    const franchise = req.decoded.franchise;
 
     res.status(200).json({
       lobby,
-      franchises
+      franchises,
+      franchise
      });
   })
 )

@@ -1,8 +1,9 @@
 import React from "react";
-import { observer } from "mobx-react";
+import { inject, observer } from "mobx-react";
 import axios from "axios";
 import * as qs from "query-string";
 
+@inject("franchiseStore")
 @observer
 class Franchise extends React.Component {
   async componentDidMount() {
@@ -11,7 +12,7 @@ class Franchise extends React.Component {
 
     try {
       const response = await axios.post(`/api/franchise/${franchiseId}/claim`, claim);
-
+      this.props.franchiseStore.setFranchise(response.data.franchise);
       localStorage.setItem("jwt", response.data.token);
       this.props.history.push(`/lobby/${response.data.lobby.id}`);
     } catch (err) {

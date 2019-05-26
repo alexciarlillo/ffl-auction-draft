@@ -4,5 +4,6 @@ CREATE TABLE IF NOT EXISTS lobbies (
     name varchar(255),
     franchise_count smallint not null,
     created_at timestamp with time zone default now(),
+    franchise_budget smallint not null,
     completed_at timestamp with time zone null
 );

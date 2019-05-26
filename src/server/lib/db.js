@@ -3,10 +3,10 @@ const TokenService = require('./TokenService');
 
 class DB {
 
-  static async createLobby({name, franchiseCount}) {
+  static async createLobby({name, franchiseCount, franchiseBudget}) {
     let lobby = null;
     try {
-      lobby = await db.one("insert into lobbies(name, franchise_count) values(${name}, ${franchiseCount}) RETURNING id", {name, franchiseCount});
+      lobby = await db.one("insert into lobbies(name, franchise_count, franchise_budget) values(${name}, ${franchiseCount}, ${franchiseBudget}) RETURNING id", {name, franchiseCount, franchiseBudget});
     } catch (err) {
       console.log(err);
     } finally {
@@ -40,10 +40,10 @@ class DB {
     let franchises = [];
     for (let i = 0; i < lobby.franchise_count; i++) {
       const franchiseNum = i + 1;
-      franchises.push({lobby_id: lobby.id, name: `Franchise ${franchiseNum}`});
+      franchises.push({lobby_id: lobby.id, name: `Franchise ${franchiseNum}`, remaining_budget: lobby.franchise_budget});
     }
 
-    const query = pgp.helpers.insert(franchises, new pgp.helpers.ColumnSet(['lobby_id', 'name'], {table: 'franchises'}));
+    const query = pgp.helpers.insert(franchises, new pgp.helpers.ColumnSet(['lobby_id', 'name', 'remaining_budget'], {table: 'franchises'}));
     return db.none(query);
   }
 

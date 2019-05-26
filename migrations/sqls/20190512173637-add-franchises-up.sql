@@ -6,6 +6,7 @@ CREATE TABLE IF NOT EXISTS franchises (
     claimed_at timestamp with time zone default null,
     name varchar(255),
     is_admin boolean not null default false,
+    remaining_budget smallint not null,
     email varchar(255),
     claim_token character varying(60)
 );

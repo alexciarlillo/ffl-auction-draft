@@ -4,18 +4,16 @@ import { inject, observer } from "mobx-react";
 import MyFranchise from "./MyFranchise";
 import FranchiseListItem from "./FranchiseListItem";
 
-const FranchiseList = ({ franchisesStore }) => (
+const FranchiseList = ({ lobbyStore, franchiseStore }) => (
   <div>
-    {franchisesStore.franchises.length > 0 ? (
+    {lobbyStore.franchises.length > 0 ? (
       <div>
-        <MyFranchise franchise={franchisesStore.franchises[0]} />
+        <MyFranchise franchise={franchiseStore.franchise} />
 
         <div className="max-w-sm rounded overflow-hidden shadow-lg">
           <div className="px-6 py-4">
             <ul>
-              {franchisesStore.franchises
-                .slice(1, franchisesStore.franchises.length)
-                .map(franchise => (
+              {lobbyStore.franchises.map(franchise => (
                   <FranchiseListItem franchise={franchise} key={franchise.id} />
                 ))}
             </ul>
@@ -28,4 +26,4 @@ const FranchiseList = ({ franchisesStore }) => (
   </div>
 );
 
-export default inject("franchisesStore")(observer(FranchiseList));
+export default inject("lobbyStore", "franchiseStore")(observer(FranchiseList));

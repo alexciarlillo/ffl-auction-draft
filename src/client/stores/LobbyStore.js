@@ -1,4 +1,5 @@
 import { observable, computed, action } from "mobx";
+import FranchiseModel from "../models/FranchiseModel";
 
 class LobbyStore {
   clockInterval = null;
@@ -6,12 +7,13 @@ class LobbyStore {
   @observable playerId;
   @observable leadingBidAmount;
   @observable leadingFranchiseId;
+  @observable franchises = [];
 
   @observable customBidAmount;
 
-  constructor(playersStore, franchisesStore) {
+  constructor(playersStore, franchiseStore) {
     this.playersStore = playersStore;
-    this.franchisesStore = franchisesStore;
+    this.franchiseStore = franchiseStore;
     this.reset();
   }
 
@@ -72,6 +74,16 @@ class LobbyStore {
     if (this.customBidAmount < this.leadingBidAmount) {
       this.setCustomBid(this.leadingBidAmount + 1);
     }
+  }
+
+  @action setFranchises(userFranchise, franchises) {
+    this.franchiseStore.setFranchise(userFranchise);
+    this.franchises = [];
+    franchises.filter((franchise) => franchise.id !== userFranchise.id).forEach((franchise) => this.addFranchise(franchise));
+  }
+
+  @action addFranchise(franchise) {
+    this.franchises.push(new FranchiseModel(franchise));
   }
 }
 

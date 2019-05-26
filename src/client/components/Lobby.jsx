@@ -16,7 +16,7 @@ class Lobby extends React.Component {
         headers: {"Authorization": `Bearer ${localStorage.getItem("jwt")}`}
       });
 
-      console.log(response.data);
+      this.props.lobbyStore.setFranchises(response.data.franchise, response.data.franchises);
     } catch (err) {
       console.log(err);
     }
