@@ -9,6 +9,13 @@ import LobbyDetails from "./LobbyDetails";
 @inject("lobbyStore")
 @observer
 class Lobby extends React.Component {
+
+  constructor() {
+    super();
+
+    this.socket = null;
+  }
+
   async componentDidMount() {
 
     try {
@@ -17,12 +24,16 @@ class Lobby extends React.Component {
       });
 
       this.props.lobbyStore.setFranchises(response.data.franchise, response.data.franchises);
+      this.props.lobbyStore.setLobbyInfo(response.data.lobby);
     } catch (err) {
       console.log(err);
     }
 
+    this.props.lobbyStore.establishSocket();
+  }
 
-    // setup sock
+  async componentWillUmount() {
+    this.props.lobbyStore.disconnectSocket();
   }
 
   render() {

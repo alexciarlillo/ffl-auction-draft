@@ -3,17 +3,31 @@ const express = require("express");
 const path = require("path");
 
 const app = express();
+const server = require('http').Server(app);
+const io = require('socket.io')(server);
 const asyncHandler = require("express-async-handler");
 const jwt = require("jsonwebtoken");
 const authJWT = require("./middleware/auth");
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
+const redis = require('redis');
+const client = redis.createClient();
 
 const mailer = require('./lib/mailer');
 const DB = require('./lib/DB');
 const TokenService = require('./lib/TokenService');
 const AuthService = require('./lib/AuthService');
+const ClockService = require('./lib/ClockService')(io);
+
+// echo redis errors to the console
+client.on('error', (err) => {
+    console.log("Redis Error " + err)
+});
+
+client.on('connect', function() {
+    console.log('Redis Connected');
+});
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
@@ -129,4 +143,34 @@ app.get(
   })
 )
 
-app.listen(8080, () => console.log("Listening on port 8080!"));
+app.post(
+  "/api/lobby/:lobbyId/pause",
+  authJWT,
+  asyncHandler(async (req, res, next) => {
+    const lobbyId = req.params.lobbyId;
+    ClockService.stopClock(lobbyId);
+    res.status(200).json({success: true});
+  })
+)
+
+app.post(
+  "/api/lobby/:lobbyId/start",
+  authJWT,
+  asyncHandler(async (req, res, next) => {
+    const lobbyId = req.params.lobbyId;
+    ClockService.startClock(lobbyId);
+    res.status(200).json({success: true});
+  })
+)
+
+app.post(
+  "/api/lobby/:lobbyId/reset",
+  authJWT,
+  asyncHandler(async (req, res, next) => {
+    const lobbyId = req.params.lobbyId;
+    ClockService.createClock(lobbyId, 120, true);
+    res.status(200).json({success: true});
+  })
+)
+
+server.listen(8080, () => console.log("Listening on port 8080!"));

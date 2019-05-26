@@ -64,6 +64,9 @@
     "query-string": "^6.5.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-router-dom": "^5.0.0"
+    "react-router-dom": "^5.0.0",
+    "redis": "^2.8.0",
+    "socketio": "^1.0.0",
+    "socketio-jwt": "root-core/socketio-jwt"
   }
 }

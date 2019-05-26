@@ -57,6 +57,7 @@ module.exports = {
     historyApiFallback: true,
     proxy: {
       "/api": "http://localhost:8080",
+      "/socket.io": "http://localhost:8080"
     }
   }
 };

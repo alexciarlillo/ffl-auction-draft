@@ -21,7 +21,7 @@ const LobbyDetails = ({ lobbyStore }) => (
       </div>
 
       <div className="w-1/5">
-        <TimeClock lobby={lobbyStore} />
+        <TimeClock />
       </div>
     </div>
   </div>
