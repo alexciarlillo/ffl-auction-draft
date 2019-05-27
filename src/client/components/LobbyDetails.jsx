@@ -10,7 +10,7 @@ class LobbyDetails extends React.Component {
 
   render() {
     return (
-      <div className="w-full overflow-hidden shadow-lg text-base">
+      <div className="w-full overflow-hidden text-base">
         <div className="flex flex-row bg-gray-800 p-2 h-full justify-start w-full">
             <div className="w-3/5">
               <CurrentPlayer />

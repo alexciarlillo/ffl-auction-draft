@@ -5,6 +5,7 @@ import axios from 'axios';
 import PlayerList from "./PlayerList";
 import FranchiseList from "./FranchiseList";
 import LobbyDetails from "./LobbyDetails";
+import Tabs from "./Tabs";
 
 @inject("lobbyStore")
 @observer
@@ -38,12 +39,17 @@ class Lobby extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="bg-gray-600 flex flex-col flex-no-wrap items-stretch h-full">
         {/* <DevTools /> */}
-        <LobbyDetails />
-        <div className="flex justify-around">
-          <FranchiseList />
-          <PlayerList />
+        <div className="flex-none">
+          <LobbyDetails />
+        </div>
+
+        <div className="flex-1">
+          <Tabs>
+            <FranchiseList label="Franchises" />
+            <PlayerList label="Players"/>
+          </Tabs>
         </div>
       </div>
     );
