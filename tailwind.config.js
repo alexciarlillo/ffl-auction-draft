@@ -1,5 +1,8 @@
 module.exports = {
   theme: {
+    fontFamily: {
+      mono: ['Source Code Pro', 'monospace'],
+    },
     extend: {}
   },
   variants: {},

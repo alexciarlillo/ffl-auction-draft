@@ -13,9 +13,21 @@ class LobbyActions extends React.Component {
     this.props.lobbyStore.makeBid(this.props.lobbyStore.minimumBidAmount);
   }
 
+  _pause = async () => {
+    await this.props.lobbyStore.pauseClock();
+  }
+
+  _start = async () => {
+    await this.props.lobbyStore.startClock();
+  }
+
+  _reset = async () => {
+    await this.props.lobbyStore.resetClock();
+  }
+
   render() {
     return (
-      <div className="bg-purple-100 flex flex-col p-2 justify-between h-full">
+      <div className="bg-purple-100 flex flex-col p-2 justify-between h-full w-1/2">
         <div className="flex flex-row">
           <button
             className="bg-yellow-400 text-grey-600 w-1/2 mx-1"
@@ -40,6 +52,11 @@ class LobbyActions extends React.Component {
           <button className="bg-gray-800 text-yellow-400 w-1/2 mx-1">
             Bid ${this.props.lobbyStore.customBidAmount}
           </button>
+        </div>
+        <div className="flex flex-row justify-around w-full">
+          <button className="bg-yellow-600 text-gray-100 w-1/3 mx-1" onClick={this._pause}> PAUSE </button>
+          <button className="bg-green-600 text-gray-100 w-1/3 mx-1" onClick={this._start}> START </button>
+          <button className="bg-red-800 text-gray-100 w-1/3 mx-1" onClick={this._reset}> RESET </button>
         </div>
       </div>
     );

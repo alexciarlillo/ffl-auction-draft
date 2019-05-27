@@ -6,14 +6,14 @@ import axios from 'axios';
 class LobbyStore {
   @observable clockRemaining = null;
   @observable playerId;
-  @observable leadingBidAmount;
+  @observable leadingBidAmount = 100;
   @observable leadingFranchiseId;
   @observable franchises = [];
   @observable socket = null;
   @observable paused = false;
   @observable lobbyInfo = {};
 
-  @observable customBidAmount;
+  @observable customBidAmount = 11;
 
   constructor(playersStore, franchiseStore) {
     this.playersStore = playersStore;
@@ -25,7 +25,7 @@ class LobbyStore {
   }
 
   @computed get leadingFranchise() {
-    return this.franchisesStore.getFranchise(this.leadingFranchiseId);
+    return this.franchises[0];
   }
 
   @computed get clock() {

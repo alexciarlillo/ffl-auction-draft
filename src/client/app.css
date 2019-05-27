@@ -1,5 +1,6 @@
-@tailwind base;
+@import "tailwindcss/base";
+@import "tailwindcss/components";
 
-@tailwind components;
+@import url('https://fonts.googleapis.com/css?family=Source+Code+Pro:300,400,700&display=swap');
 
-@tailwind utilities;
+@import "tailwindcss/utilities";

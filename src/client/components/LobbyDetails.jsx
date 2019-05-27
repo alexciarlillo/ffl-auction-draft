@@ -3,28 +3,32 @@ import { inject, observer } from "mobx-react";
 import CurrentPlayer from "./CurrentPlayer";
 import CurrentBid from "./CurrentBid";
 import LobbyActions from "./LobbyActions";
-import TimeClock from "./TimeClock";
+import LobbyClock from "./LobbyClock";
 
-const LobbyDetails = ({ lobbyStore }) => (
-  <div className="w-full rounded overflow-hidden shadow-lg text-base h-20">
-    <div className="flex flex-row justify-between items-stretch h-full">
-      <div className="w-1/5">
-        <CurrentPlayer />
+
+class LobbyDetails extends React.Component {
+
+  render() {
+    return (
+      <div className="w-full overflow-hidden shadow-lg text-base">
+        <div className="flex flex-row bg-gray-800 p-2 h-full justify-start w-full">
+            <div className="w-2/5">
+              <CurrentPlayer />
+            </div>
+
+            <div className="w-1/5">
+              <CurrentBid />
+            </div>
+            <div className="w-2/5">
+              <LobbyClock />
+            </div>
+        </div>
+        <div className="w-full h-20 flex flex-row justify-center">
+          <LobbyActions />
+        </div>
       </div>
+    );
+  }
+}
 
-      <div className="w-1/5">
-        <CurrentBid lobby={lobbyStore} />
-      </div>
-
-      <div className="w-2/5">
-        <LobbyActions />
-      </div>
-
-      <div className="w-1/5">
-        <TimeClock />
-      </div>
-    </div>
-  </div>
-);
-
-export default inject("lobbyStore")(observer(LobbyDetails));
+export default LobbyDetails;

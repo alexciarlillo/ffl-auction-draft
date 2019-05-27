@@ -1,11 +1,17 @@
 import React from "react";
-import { observer } from "mobx-react";
+import { inject, observer } from "mobx-react";
 
-const CurrentBid = observer(({ lobby }) => (
-  <div className="bg-green-100 text-center flex flex-col items-center justify-center h-full">
-    <div>Current Bid</div>
-    <div>${lobby.leadingBidAmount}</div>
-  </div>
-));
+@inject("lobbyStore")
+@observer
+class CurrentBid extends React.Component {
+
+  render() {
+    return (
+      <div className="bg-gray-200 rounded-full flex flex-col items-center justify-center w-16 h-16">
+        <div className="text-center text-xl text-gray-700">${this.props.lobbyStore.leadingBidAmount}</div>
+      </div>
+    );
+  }
+}
 
 export default CurrentBid;

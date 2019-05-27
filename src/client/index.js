@@ -33,7 +33,7 @@ ReactDOM.render(
     franchiseStore={franchiseStore}
   >
     <Router>
-      <div className="container mx-auto py-8">
+      <div className="container mx-auto">
         <Route path="/create" component={CreateLobby} />
         <Route path="/join/:lobbyId" component={JoinLobby} />
         <Route path="/lobby/:lobbyId" component={Lobby} />
