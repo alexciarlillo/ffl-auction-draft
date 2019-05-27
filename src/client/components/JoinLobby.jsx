@@ -44,18 +44,22 @@ class JoinLobby extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="md:mx-auto md:max-w-sm md:rounded md:overflow-hidden md:shadow-lg">
         {! this.state.created &&
-          <form onSubmit={this._handleSubmit}>
-            <label>Franchise Name:
-              <input type="text" name="franchise_name" value={this.state.form.name} onChange={this._handleChange}/>
+          <form onSubmit={this._handleSubmit} className="w-full px-6 py-4">
+            <label className="block py-4">
+              <span className="text-gray-700">Franchise Name</span>
+              <input className="form-input mt-1 block w-full" type="text" name="franchise_name" value={this.state.form.name} onChange={this._handleChange} maxLength="200" required/>
             </label>
 
-            <label>Email:
-              <input type="text" name="email" value={this.state.form.email} onChange={this._handleChange}/>
+            <label className="block py-4">
+              <span className="text-gray-700">Email</span>
+              <input className="form-input mt-1 block w-full" type="email" name="email" value={this.state.form.email} onChange={this._handleChange} maxLength="200" required/>
             </label>
 
-            <button type="submit">Submit</button>
+            <div className="flex flex-row justify-end py-4">
+              <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded w-1/3" type="submit">Submit</button>
+            </div>
           </form>
         }
 

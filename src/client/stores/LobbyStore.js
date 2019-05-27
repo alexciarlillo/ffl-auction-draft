@@ -80,13 +80,13 @@ class LobbyStore {
   }
 
   @action establishSocket(token) {
-    this.socket = io.connect("http://192.168.1.130:3000");
+    this.socket = io.connect("http://localhost:3000");
 
     this.socket.on('connect', () => {
       this.socket
         .emit('authenticate', {token: localStorage.getItem("jwt")})
         .on('authenticated', () => {
-          // trigger UI element to show connection status
+          // TODO: trigger UI element to show connection status
           console.log('authenticated');
         })
         .on('unauthorized', (msg) => {
