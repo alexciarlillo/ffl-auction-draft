@@ -7,7 +7,7 @@ class LobbyClock extends React.Component {
 
   render () {
     return (
-      <div className="flex flex-row justify-center items-center font-mono text-gray-700 text-4xl bg-yellow-500 p-2">
+      <div className="text-right align-top font-mono text-yellow-500 text-2xl">
         {this.props.lobbyStore.minutes.toLocaleString("en", { minimumIntegerDigits: 2 })}:
         {this.props.lobbyStore.seconds.toLocaleString("en", { minimumIntegerDigits: 2 })}
       </div>

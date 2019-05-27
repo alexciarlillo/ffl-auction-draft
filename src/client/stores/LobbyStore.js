@@ -20,10 +20,6 @@ class LobbyStore {
     this.franchiseStore = franchiseStore;
   }
 
-  @computed get player() {
-    return this.playersStore.players.getPlayer(this.playerId);
-  }
-
   @computed get leadingFranchise() {
     return this.franchises[0];
   }
@@ -54,9 +50,7 @@ class LobbyStore {
   }
 
   @action setCustomBid(amount) {
-    if (amount > this.leadingBidAmount) {
-      this.customBidAmount = amount;
-    }
+    this.customBidAmount = parseInt(amount);
   }
 
   @action makeBid(amount) {
@@ -64,9 +58,17 @@ class LobbyStore {
       this.leadingBidAmount = amount;
     }
 
-    if (this.customBidAmount < this.leadingBidAmount) {
+    if (this.customBidAmount <= this.leadingBidAmount) {
       this.setCustomBid(this.leadingBidAmount + 1);
     }
+  }
+
+  @action submitMinimumBid() {
+    this.makeBid(this.minimumBidAmount);
+  }
+
+  @action submitCustomBid() {
+    this.makeBid(this.customBidAmount);
   }
 
   @action setFranchises(userFranchise, franchises) {
