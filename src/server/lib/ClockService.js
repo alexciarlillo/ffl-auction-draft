@@ -1,7 +1,6 @@
 const socketioJwt = require('socketio-jwt');
 
 class ClockService {
-
   constructor(io) {
     this._io = io;
     this._clockInterval = null;
@@ -19,19 +18,19 @@ class ClockService {
 
     this._clockInterval = setInterval(() => {
       this._clocks.forEach((lobbyClock) => {
-        if (! lobbyClock.paused && lobbyClock.remaining > 0) {
+        if (!lobbyClock.paused && lobbyClock.remaining > 0) {
           lobbyClock.remaining--;
         }
 
         this._io.sockets.in(lobbyClock.lobbyId).emit('tick', lobbyClock);
-      })
+      });
     }, 1000);
   }
 
   createClock(lobbyId, time, paused = true) {
-    let lobbyClock = this._clocks.find((lobbyClock) => lobbyClock.lobbyId === lobbyId);
+    const lobbyClock = this._clocks.find(lobbyClock => lobbyClock.lobbyId === lobbyId);
 
-    if (! lobbyClock) {
+    if (!lobbyClock) {
       this._clocks.push({ lobbyId, remaining: time, paused });
     } else {
       lobbyClock.remaining = time;
@@ -40,9 +39,9 @@ class ClockService {
   }
 
   startClock(lobbyId) {
-    let lobbyClock = this._clocks.find((lobbyClock) => lobbyClock.lobbyId === lobbyId);
+    const lobbyClock = this._clocks.find(lobbyClock => lobbyClock.lobbyId === lobbyId);
 
-    if (! lobbyClock) {
+    if (!lobbyClock) {
       this.createClock(lobbyId, 120, false);
     }
 
@@ -52,12 +51,12 @@ class ClockService {
   }
 
   stopClock(lobbyId) {
-    let lobbyClock = this._clocks.find((lobbyClock) => lobbyClock.lobbyId === lobbyId);
+    const lobbyClock = this._clocks.find(lobbyClock => lobbyClock.lobbyId === lobbyId);
 
-    if (lobbyClock && ! lobbyClock.paused) {
+    if (lobbyClock && !lobbyClock.paused) {
       lobbyClock.paused = true;
     }
   }
 }
 
-module.exports = (io) => {return new ClockService(io)};
+module.exports = io => new ClockService(io);

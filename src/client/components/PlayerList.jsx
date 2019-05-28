@@ -1,23 +1,23 @@
-import React from "react";
-import { inject, observer } from "mobx-react";
+import React from 'react';
+import { inject, observer } from 'mobx-react';
 
-import PlayerListItem from "./PlayerListItem";
+import PlayerListItem from './PlayerListItem';
 
 const PlayerList = ({ playersStore }) => (
   <div className="bg-gray-700 h-full p-2">
     {playersStore.loading ? (
       <h1>Loading players...</h1>
     ) : (
-      <div className="h-full">
+      <div className="h-full flex flex-col">
         <input type="text" className="form-input mt-1 block w-full mb-4" placeholder="Search Players" />
         <ul className="h-full overflow-y-scroll">
           {playersStore.players.map(player => (
             <PlayerListItem player={player} key={player.id} />
           ))}
-      </ul>
+        </ul>
       </div>
     )}
   </div>
 );
 
-export default inject("playersStore")(observer(PlayerList));
+export default inject('playersStore')(observer(PlayerList));

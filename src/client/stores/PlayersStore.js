@@ -1,4 +1,4 @@
-import { observable, computed, action, runInAction } from "mobx";
+import { observable, action, runInAction } from "mobx";
 import PlayerModel from "../models/PlayerModel";
 
 class PlayersStore {

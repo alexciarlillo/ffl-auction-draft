@@ -81,7 +81,7 @@ class LobbyStore {
     this.franchises.push(new FranchiseModel(franchise));
   }
 
-  @action establishSocket(token) {
+  @action establishSocket() {
     this.socket = io.connect("http://localhost:3000");
 
     this.socket.on('connect', () => {
@@ -102,19 +102,19 @@ class LobbyStore {
   }
 
   async pauseClock() {
-    const response = await axios.post(`/api/lobby/${this.lobbyInfo.id}/pause`, {remaining: this.clock}, {
+    await axios.post(`/api/lobby/${this.lobbyInfo.id}/pause`, {remaining: this.clock}, {
       headers: {"Authorization": `Bearer ${localStorage.getItem("jwt")}`}
     });
   }
 
   async startClock() {
-    const response = await axios.post(`/api/lobby/${this.lobbyInfo.id}/start`, {remaining: this.clock}, {
+    await axios.post(`/api/lobby/${this.lobbyInfo.id}/start`, {remaining: this.clock}, {
       headers: {"Authorization": `Bearer ${localStorage.getItem("jwt")}`}
     });
   }
 
   async resetClock() {
-    const response = await axios.post(`/api/lobby/${this.lobbyInfo.id}/reset`, {remaining: this.clock}, {
+    await axios.post(`/api/lobby/${this.lobbyInfo.id}/reset`, {remaining: this.clock}, {
       headers: {"Authorization": `Bearer ${localStorage.getItem("jwt")}`}
     });
   }

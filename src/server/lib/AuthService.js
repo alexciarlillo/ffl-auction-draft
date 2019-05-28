@@ -1,9 +1,8 @@
-const DB = require('./db');
 const bcrypt = require('bcrypt');
+const DB = require('./db');
 
 class AuthService {
-
-  static async AuthorizeFranchiseClaim({franchiseId, claimToken}) {
+  static async AuthorizeFranchiseClaim({ franchiseId, claimToken }) {
     const franchise = await DB.getFranchiseById(franchiseId);
     let authed = false;
 
@@ -11,7 +10,7 @@ class AuthService {
       authed = await bcrypt.compare(claimToken, franchise.claim_token);
     }
 
-    return {authed, franchise};
+    return { authed, franchise };
   }
 }
 

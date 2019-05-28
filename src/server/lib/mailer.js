@@ -1,8 +1,7 @@
-const nodemailer = require("nodemailer");
+const nodemailer = require('nodemailer');
 
 class Mailer {
-
-  constructor () {
+  constructor() {
     this._transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST,
       port: 2525,
@@ -13,13 +12,15 @@ class Mailer {
     });
   }
 
-  async sendFranchiseToken({recipient, token, franchise, lobby}) {
+  async sendFranchiseToken({
+    recipient, token, franchise, lobby
+  }) {
     this._transporter.sendMail({
-      from:    'test@localhost',
-      to:      recipient,
+      from: 'test@localhost',
+      to: recipient,
       subject: `Access link for ${lobby.name}`,
-      text:    'Hello!\nAccess your franchise here: http://'
-      + process.env.HOSTNAME + '/franchise/' + encodeURIComponent(franchise.id) + '/?claim_token=' + encodeURIComponent(token),
+      text: `Hello!\nAccess your franchise here: http://${
+        process.env.HOSTNAME}/franchise/${encodeURIComponent(franchise.id)}/?claim_token=${encodeURIComponent(token)}`,
     });
   }
 }
