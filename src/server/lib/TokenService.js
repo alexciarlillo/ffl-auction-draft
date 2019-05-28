@@ -1,6 +1,6 @@
-const crypto = require('crypto');
-const base58 = require('bs58');
-const bcrypt = require('bcrypt');
+const crypto = require("crypto");
+const base58 = require("bs58");
+const bcrypt = require("bcrypt");
 
 class TokenService {
   static async getToken() {

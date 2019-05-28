@@ -1,7 +1,7 @@
 import { observable, computed, action } from "mobx";
 import FranchiseModel from "../models/FranchiseModel";
-import io from 'socket.io-client';
-import axios from 'axios';
+import io from "socket.io-client";
+import axios from "axios";
 
 class LobbyStore {
   @observable clockRemaining = null;
@@ -41,10 +41,10 @@ class LobbyStore {
   }
 
   @action setLobbyInfo(lobbyInfo) {
-    this.lobbyInfo = {...this.lobbyInfo, ...lobbyInfo};
+    this.lobbyInfo = { ...this.lobbyInfo, ...lobbyInfo };
   }
 
-  @action tock({remaining, paused}) {
+  @action tock({ remaining, paused }) {
     this.clockRemaining = remaining;
     this.paused = paused;
   }
@@ -74,7 +74,9 @@ class LobbyStore {
   @action setFranchises(userFranchise, franchises) {
     this.franchiseStore.setFranchise(userFranchise);
     this.franchises = [];
-    franchises.filter((franchise) => franchise.id !== userFranchise.id).forEach((franchise) => this.addFranchise(franchise));
+    franchises
+      .filter(franchise => franchise.id !== userFranchise.id)
+      .forEach(franchise => this.addFranchise(franchise));
   }
 
   @action addFranchise(franchise) {
@@ -84,39 +86,51 @@ class LobbyStore {
   @action establishSocket() {
     this.socket = io.connect("http://localhost:3000");
 
-    this.socket.on('connect', () => {
+    this.socket.on("connect", () => {
       this.socket
-        .emit('authenticate', {token: localStorage.getItem("jwt")})
-        .on('authenticated', () => {
+        .emit("authenticate", { token: localStorage.getItem("jwt") })
+        .on("authenticated", () => {
           // TODO: trigger UI element to show connection status
-          console.log('authenticated');
+          console.log("authenticated");
         })
-        .on('unauthorized', (msg) => {
-          console.log('unauthorized: ' + JSON.stringify(msg.data));
-        })
+        .on("unauthorized", msg => {
+          console.log("unauthorized: " + JSON.stringify(msg.data));
+        });
     });
 
-    this.socket.on('tick', (data) => {
+    this.socket.on("tick", data => {
       this.tock(data);
-    })
+    });
   }
 
   async pauseClock() {
-    await axios.post(`/api/lobby/${this.lobbyInfo.id}/pause`, {remaining: this.clock}, {
-      headers: {"Authorization": `Bearer ${localStorage.getItem("jwt")}`}
-    });
+    await axios.post(
+      `/api/lobby/${this.lobbyInfo.id}/pause`,
+      { remaining: this.clock },
+      {
+        headers: { Authorization: `Bearer ${localStorage.getItem("jwt")}` }
+      }
+    );
   }
 
   async startClock() {
-    await axios.post(`/api/lobby/${this.lobbyInfo.id}/start`, {remaining: this.clock}, {
-      headers: {"Authorization": `Bearer ${localStorage.getItem("jwt")}`}
-    });
+    await axios.post(
+      `/api/lobby/${this.lobbyInfo.id}/start`,
+      { remaining: this.clock },
+      {
+        headers: { Authorization: `Bearer ${localStorage.getItem("jwt")}` }
+      }
+    );
   }
 
   async resetClock() {
-    await axios.post(`/api/lobby/${this.lobbyInfo.id}/reset`, {remaining: this.clock}, {
-      headers: {"Authorization": `Bearer ${localStorage.getItem("jwt")}`}
-    });
+    await axios.post(
+      `/api/lobby/${this.lobbyInfo.id}/reset`,
+      { remaining: this.clock },
+      {
+        headers: { Authorization: `Bearer ${localStorage.getItem("jwt")}` }
+      }
+    );
   }
 
   @action disconnectSocket() {

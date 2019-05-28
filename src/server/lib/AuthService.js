@@ -1,5 +1,5 @@
-const bcrypt = require('bcrypt');
-const DB = require('./db');
+const bcrypt = require("bcrypt");
+const DB = require("./db");
 
 class AuthService {
   static async AuthorizeFranchiseClaim({ franchiseId, claimToken }) {

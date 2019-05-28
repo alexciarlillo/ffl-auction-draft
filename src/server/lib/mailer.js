@@ -1,4 +1,4 @@
-const nodemailer = require('nodemailer');
+const nodemailer = require("nodemailer");
 
 class Mailer {
   constructor() {
@@ -12,15 +12,16 @@ class Mailer {
     });
   }
 
-  async sendFranchiseToken({
-    recipient, token, franchise, lobby
-  }) {
+  async sendFranchiseToken({ recipient, token, franchise, lobby }) {
     this._transporter.sendMail({
-      from: 'test@localhost',
+      from: "test@localhost",
       to: recipient,
       subject: `Access link for ${lobby.name}`,
       text: `Hello!\nAccess your franchise here: http://${
-        process.env.HOSTNAME}/franchise/${encodeURIComponent(franchise.id)}/?claim_token=${encodeURIComponent(token)}`,
+        process.env.HOSTNAME
+      }/franchise/${encodeURIComponent(
+        franchise.id
+      )}/?claim_token=${encodeURIComponent(token)}`
     });
   }
 }

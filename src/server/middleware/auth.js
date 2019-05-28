@@ -1,9 +1,9 @@
-const jwt = require('jsonwebtoken');
+const jwt = require("jsonwebtoken");
 
 const authJWT = (req, res, next) => {
-  let token = req.headers['x-access-token'] || req.headers.authorization;
+  let token = req.headers["x-access-token"] || req.headers.authorization;
 
-  if (token.startsWith('Bearer ')) {
+  if (token.startsWith("Bearer ")) {
     // Remove Bearer from string
     token = token.slice(7, token.length);
   }
@@ -13,7 +13,7 @@ const authJWT = (req, res, next) => {
       if (err) {
         return res.status(403).json({
           success: false,
-          message: 'Invalid token'
+          message: "Invalid token"
         });
       }
       req.decoded = decoded;
@@ -22,7 +22,7 @@ const authJWT = (req, res, next) => {
   } else {
     return res.json({
       success: false,
-      message: 'Token required'
+      message: "Token required"
     });
   }
 };

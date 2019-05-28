@@ -7,7 +7,7 @@ export default class FranchiseModel {
   @observable is_admin;
   @observable remaining_budget;
 
-  constructor({name, budget, id, is_admin, remaining_budget}) {
+  constructor({ name, budget, id, is_admin, remaining_budget }) {
     this.id = id;
     this.name = name;
     this.budget = budget;

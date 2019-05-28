@@ -14,8 +14,8 @@ const FranchiseList = ({ lobbyStore, franchiseStore }) => (
           <div className="px-6 py-4">
             <ul>
               {lobbyStore.franchises.map(franchise => (
-                  <FranchiseListItem franchise={franchise} key={franchise.id} />
-                ))}
+                <FranchiseListItem franchise={franchise} key={franchise.id} />
+              ))}
             </ul>
           </div>
         </div>

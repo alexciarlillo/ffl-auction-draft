@@ -11,7 +11,10 @@ class Franchise extends React.Component {
     const claim = qs.parse(this.props.location.search);
 
     try {
-      const response = await axios.post(`/api/franchise/${franchiseId}/claim`, claim);
+      const response = await axios.post(
+        `/api/franchise/${franchiseId}/claim`,
+        claim
+      );
       this.props.franchiseStore.setFranchise(response.data.franchise);
       localStorage.setItem("jwt", response.data.token);
       this.props.history.push(`/lobby/${response.data.lobby.id}`);
