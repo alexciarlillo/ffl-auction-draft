@@ -1,0 +1,18 @@
+{
+  "printWidth": 100,
+  "singleQuote": true,
+  "trailingComma": "es5",
+  "bracketSpacing": false,
+  "jsxBracketSameLine": false,
+  "parser": "babel",
+  "semi": true,
+  "requirePragma": false,
+  "overrides": [
+    {
+      "files": "*.scss",
+      "options": {
+        "parser": "scss"
+      }
+    }
+  ]
+}
