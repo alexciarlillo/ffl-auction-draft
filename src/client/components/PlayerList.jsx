@@ -4,7 +4,7 @@ import {inject, observer} from 'mobx-react';
 import PlayerListItem from './PlayerListItem';
 
 const PlayerList = ({playersStore}) => (
-  <div className="bg-gray-700 h-full p-2">
+  <div className="bg-gray-300 h-full p-2">
     {playersStore.loading ? (
       <h1>Loading players...</h1>
     ) : (

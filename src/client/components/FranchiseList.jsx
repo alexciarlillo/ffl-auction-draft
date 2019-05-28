@@ -1,23 +1,21 @@
-import React from "react";
-import { inject, observer } from "mobx-react";
+import React from 'react';
+import {inject, observer} from 'mobx-react';
 
-import MyFranchise from "./MyFranchise";
-import FranchiseListItem from "./FranchiseListItem";
+import MyFranchise from './MyFranchise';
+import FranchiseListItem from './FranchiseListItem';
 
-const FranchiseList = ({ lobbyStore, franchiseStore }) => (
-  <div className="bg-gray-700 h-full overflow-y-scroll">
+const FranchiseList = ({lobbyStore, franchiseStore}) => (
+  <div className="bg-gray-300 h-full overflow-y-scroll">
     {lobbyStore.franchises.length > 0 ? (
       <div className="flex flex-col">
         <MyFranchise franchise={franchiseStore.franchise} />
 
-        <div className="max-w-sm rounded overflow-hidden shadow-lg">
-          <div className="px-6 py-4">
-            <ul>
-              {lobbyStore.franchises.map(franchise => (
-                <FranchiseListItem franchise={franchise} key={franchise.id} />
-              ))}
-            </ul>
-          </div>
+        <div className="w-full p-2">
+          <ul>
+            {lobbyStore.franchises.map(franchise => (
+              <FranchiseListItem franchise={franchise} key={franchise.id} />
+            ))}
+          </ul>
         </div>
       </div>
     ) : (
@@ -26,4 +24,4 @@ const FranchiseList = ({ lobbyStore, franchiseStore }) => (
   </div>
 );
 
-export default inject("lobbyStore", "franchiseStore")(observer(FranchiseList));
+export default inject('lobbyStore', 'franchiseStore')(observer(FranchiseList));

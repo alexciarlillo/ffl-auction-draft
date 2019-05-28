@@ -3,7 +3,7 @@ import {observer} from 'mobx-react';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
 const PlayerListItem = observer(({player}) => (
-  <li className="text-gray-700 bg-gray-100 p-4">
+  <li className="text-gray-700 bg-white p-4 border-b border-gray-200">
     <div className="flex flex-row justify-between items-center">
       <div>
         <div className="text-xl">{player.name}</div>
