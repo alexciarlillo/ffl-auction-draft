@@ -2,11 +2,11 @@ import React from 'react';
 import {inject, observer} from 'mobx-react';
 import axios from 'axios';
 
-import PlayerList from './PlayerList';
-import FranchiseList from './FranchiseList';
-import LobbyDetails from './LobbyDetails';
-import LobbyActions from './LobbyActions';
-import Tabs from './Tabs';
+import PlayerList from './Lobby/Players/PlayerList';
+import FranchiseList from './Lobby/Franchises/FranchiseList';
+import LobbyDetails from './Lobby/LobbyDetails';
+import LobbyActions from './Lobby/LobbyActions';
+import Tabs from './UI/Tabs';
 
 @inject('lobbyStore')
 @observer

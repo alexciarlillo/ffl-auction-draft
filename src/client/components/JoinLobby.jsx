@@ -1,15 +1,14 @@
-import React from "react";
-import axios from "axios";
+import React from 'react';
 
 class JoinLobby extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      form: { email: "", franchise_name: "" },
+      form: {email: '', franchise_name: ''},
       submitting: false,
       joined: false,
-      error: false
+      error: false,
     };
   }
 
@@ -20,8 +19,8 @@ class JoinLobby extends React.Component {
     this.setState({
       form: {
         ...this.state.form,
-        [name]: value
-      }
+        [name]: value,
+      },
     });
   };
 
@@ -29,17 +28,17 @@ class JoinLobby extends React.Component {
     event.preventDefault();
 
     this.setState({
-      submitting: true
+      submitting: true,
     });
 
     try {
       this.setState({
         submitting: false,
-        joined: true
+        joined: true,
       });
     } catch (err) {
       this.setState({
-        error: true
+        error: true,
       });
     }
   };
@@ -86,13 +85,9 @@ class JoinLobby extends React.Component {
           </form>
         )}
 
-        {this.state.joined && (
-          <h2>Franchise claimed. Check email for access link</h2>
-        )}
+        {this.state.joined && <h2>Franchise claimed. Check email for access link</h2>}
 
-        {this.state.error && (
-          <h2>An error occurred. Please try again. Lobby may be filled.</h2>
-        )}
+        {this.state.error && <h2>An error occurred. Please try again. Lobby may be filled.</h2>}
       </div>
     );
   }

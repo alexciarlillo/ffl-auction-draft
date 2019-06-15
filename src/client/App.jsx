@@ -8,7 +8,7 @@ import {faAward, faStar} from '@fortawesome/pro-regular-svg-icons';
 import CreateLobby from './components/CreateLobby';
 import JoinLobby from './components/JoinLobby';
 import Lobby from './components/Lobby';
-import Franchise from './components/Franchise';
+import ClaimFranchise from './components/ClaimFranchise';
 
 import PlayersStore from './stores/PlayersStore';
 import FranchiseStore from './stores/FranchiseStore';
@@ -29,8 +29,8 @@ export default class App extends React.Component {
           <div className="container mx-auto h-full">
             <Route path="/create" component={CreateLobby} />
             <Route path="/join/:lobbyId" component={JoinLobby} />
+            <Route path="/franchise/:franchiseId" component={ClaimFranchise} />
             <Route path="/lobby/:lobbyId" component={Lobby} />
-            <Route path="/franchise/:franchiseId" component={Franchise} />
           </div>
         </Router>
       </Provider>

@@ -1,7 +1,6 @@
 import React from 'react';
 import {observer} from 'mobx-react';
 import BidActions from './BidActions';
-import AdminActions from './AdminActions';
 
 @observer
 class LobbyActions extends React.Component {
