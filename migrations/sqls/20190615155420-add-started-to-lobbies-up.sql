@@ -1,0 +1,1 @@
+alter table lobbies add column if not exists started_at timestamp with time zone;

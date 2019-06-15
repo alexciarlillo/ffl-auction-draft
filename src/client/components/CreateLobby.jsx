@@ -1,5 +1,6 @@
-import React from "react";
-import axios from "axios";
+import React from 'react';
+import axios from 'axios';
+import moment from 'moment';
 
 class CreateLobby extends React.Component {
   constructor(props) {
@@ -7,26 +8,31 @@ class CreateLobby extends React.Component {
 
     this.state = {
       form: {
-        name: "",
-        email: "",
-        franchiseCount: "",
-        franchiseBudget: ""
+        name: '',
+        email: '',
+        franchiseCount: '',
+        franchiseBudget: '',
+        startAt: moment().add(1, 'hour'),
       },
       submitting: false,
       created: false,
-      error: false
+      error: false,
     };
   }
 
   _handleChange = async event => {
     const name = event.target.name;
-    const value = event.target.value;
+    let value = event.target.value;
+
+    if (name === 'startAt') {
+      value = moment(value, moment.HTML5_FMT.DATETIME_LOCAL);
+    }
 
     this.setState({
       form: {
         ...this.state.form,
-        [name]: value
-      }
+        [name]: value,
+      },
     });
   };
 
@@ -34,7 +40,7 @@ class CreateLobby extends React.Component {
     event.preventDefault();
 
     this.setState({
-      submitting: true
+      submitting: true,
     });
 
     try {
@@ -42,11 +48,11 @@ class CreateLobby extends React.Component {
 
       this.setState({
         submitting: false,
-        created: true
+        created: true,
       });
     } catch (err) {
       this.setState({
-        error: true
+        error: true,
       });
     }
   };
@@ -115,6 +121,18 @@ class CreateLobby extends React.Component {
               />
             </label>
 
+            <label className="block py-4">
+              <span className="text-gray-700">Start Date/Time</span>
+              <input
+                className="form-input mt-1 block w-full"
+                type="datetime-local"
+                name="startAt"
+                value={this.state.form.startAt.format(moment.HTML5_FMT.DATETIME_LOCAL)}
+                onChange={this._handleChange}
+                required
+              />
+            </label>
+
             <div className="flex flex-row justify-end py-4">
               <button
                 className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded w-1/3"
@@ -126,9 +144,7 @@ class CreateLobby extends React.Component {
           </form>
         )}
 
-        {this.state.created && (
-          <h2>Draft lobby created. Check email for access link</h2>
-        )}
+        {this.state.created && <h2>Draft lobby created. Check email for access link</h2>}
 
         {this.state.error && <h2>An error occurred. Please try again.</h2>}
       </div>
