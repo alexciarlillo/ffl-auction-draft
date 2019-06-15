@@ -1,8 +1,13 @@
 CREATE TABLE IF NOT EXISTS event_types (
-    id  uuid not null primary key default gen_random_uuid(),
+    id  serial primary key,
     name varchar(255),
-    franchise_count smallint not null,
-    created_at timestamp with time zone default now(),
-    franchise_budget smallint not null,
-    completed_at timestamp with time zone null
 );
+
+INSERT INTO event_types (name) VALUES('draft_started');
+INSERT INTO event_types (name) VALUES('draft_ended');
+INSERT INTO event_types (name) VALUES('player_nominated');
+INSERT INTO event_types (name) VALUES('player_drafted');
+INSERT INTO event_types (name) VALUES('clock_paused');
+INSERT INTO event_types (name) VALUES('clock_resumed');
+INSERT INTO event_types (name) VALUES('franchise_claimed');
+INSERT INTO event_types (name) VALUES('franchise_bid');

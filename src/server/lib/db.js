@@ -99,10 +99,29 @@ class DB {
     return franchise;
   }
 
-  static async startReadyLobbies() {
-    await db.query(
-      "UPDATE lobbies SET started_at = now() WHERE started_at IS NULL AND date_trunc('minute', start_at) <= date_trunc('minute', now())"
-    );
+  static async getStartableLobbies() {
+    let lobbies = null;
+
+    try {
+      lobbies = await db.query(
+        "SELECT id FROM lobbies WHERE started_at IS NULL AND date_trunc('minute', start_at) <= date_trunc('minute', now())"
+      );
+    } catch (err) {
+      console.log(err);
+    }
+
+    return lobbies;
+  }
+
+  static async systemEvent({lobbyId, eventTypeId}) {
+    try {
+      await db.one(
+        'INSERT INTO events (lobby_id, event_type_id, system_event) VALUES(${lobbyId}, ${eventTypeId}, true) RETURNING id',
+        {lobbyId, eventTypeId}
+      );
+    } catch (err) {
+      console.log(err);
+    }
   }
 }
 
