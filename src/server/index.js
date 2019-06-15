@@ -19,6 +19,9 @@ const DB = require('./lib/DB');
 const TokenService = require('./lib/TokenService');
 const AuthService = require('./lib/AuthService');
 const ClockService = require('./lib/ClockService')(io);
+const ScheduleService = require('./lib/ScheduleService');
+
+ScheduleService.Start();
 
 // echo redis errors to the console
 client.on('error', err => {

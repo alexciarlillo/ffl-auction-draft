@@ -98,6 +98,12 @@ class DB {
 
     return franchise;
   }
+
+  static async startReadyLobbies() {
+    await db.query(
+      "UPDATE lobbies SET started_at = now() WHERE started_at IS NULL AND date_trunc('minute', start_at) <= date_trunc('minute', now())"
+    );
+  }
 }
 
 module.exports = DB;
