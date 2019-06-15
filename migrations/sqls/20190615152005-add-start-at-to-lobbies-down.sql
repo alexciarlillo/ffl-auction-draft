@@ -1,0 +1,1 @@
+alter table lobbies drop column if exists start_at;
